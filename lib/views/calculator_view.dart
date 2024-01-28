@@ -3,29 +3,52 @@ import 'package:flutter/material.dart';
 
 //calculator view for the application
 
-class CalculatorView extends StatelessWidget {
+class CalculatorView extends StatefulWidget {
   const CalculatorView({Key? key}) : super(key: key);
 
   @override
+  State<CalculatorView> createState() => _CalculatorViewState();
+}
+
+class _CalculatorViewState extends State<CalculatorView> {
+  num x = 0;
+  num y = 0;
+  num result = 0;
+
+  final displayOneController = TextEditingController();
+  final displayTwoController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    displayOneController.text = x.toString();
+    displayTwoController.text = y.toString();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.all(32.0),
       child: Column(
         children: [
           //Calculator Display
-          DisplayOne(hint: "Enter first number : "),
-          SizedBox(
-            height: 30,
+
+          Display(
+              hint: "Enter first number : ", controller: displayOneController),
+
+          const SizedBox(
+            height: 2,
           ),
 
-          DisplayOne(hint: "Enter second number : "),
+          Display(
+              hint: "Enter second number : ", controller: displayTwoController),
 
           const SizedBox(
             height: 30,
           ),
 
-          const Text(
-            "0",
+          Text(
+            result.toString(),
             style: TextStyle(
                 fontSize: 40.0,
                 color: Colors.black,
@@ -37,24 +60,60 @@ class CalculatorView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FloatingActionButton(
-                onPressed: () {},
-                child: const Icon(CupertinoIcons.add),
+                onPressed: () {
+                  setState(() {
+                    result = num.tryParse(displayOneController.text)! +
+                        num.tryParse(displayTwoController.text)!;
+                  });
+                },
+                child: Icon(CupertinoIcons.add),
               ),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    result = num.tryParse(displayOneController.text)! -
+                        num.tryParse(displayTwoController.text)!;
+                  });
+                },
                 child: Icon(CupertinoIcons.minus),
               ),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    result = num.tryParse(displayOneController.text)! *
+                        num.tryParse(displayTwoController.text)!;
+                  });
+                },
                 child: Icon(CupertinoIcons.multiply),
               ),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    result = num.tryParse(displayOneController.text)! /
+                        num.tryParse(displayTwoController.text)!;
+                  });
+                },
                 child: Icon(CupertinoIcons.divide),
               ),
             ],
           ),
+
           //Calculator Buttons
+          const SizedBox(
+            height: 20,
+          ),
+
+          FloatingActionButton.extended(
+              onPressed: () {
+                setState() {
+                  x = 0;
+                  y = 0;
+                  result = 0;
+                  displayOneController.clear();
+                  displayTwoController.clear();
+                }
+              },
+              label: const Text("Clear"))
         ],
       ),
     );
@@ -63,10 +122,12 @@ class CalculatorView extends StatelessWidget {
 
 //calculator display for the application
 
-class DisplayOne extends StatelessWidget {
-  const DisplayOne({super.key, this.hint = "Enter a number"});
+class Display extends StatelessWidget {
+  const Display(
+      {super.key, this.hint = "Enter a number", required this.controller});
 
-  final String hint;
+  final String? hint;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
