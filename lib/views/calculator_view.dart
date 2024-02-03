@@ -34,19 +34,23 @@ class _CalculatorViewState extends State<CalculatorView> {
           //Calculator Display
 
           Display(
-              hint: "Enter first number : ", controller: displayOneController),
-
+            hint: "Enter first number : ",
+            controller: displayOneController,
+          ),
           const SizedBox(
             height: 2,
           ),
 
           Display(
-              hint: "Enter second number : ", controller: displayTwoController),
+            hint: "Enter second number : ",
+            controller: displayTwoController,
+          ),
 
           const SizedBox(
             height: 30,
           ),
 
+//text to show output after calculation
           Text(
             result.toString(),
             style: const TextStyle(
@@ -59,6 +63,7 @@ class _CalculatorViewState extends State<CalculatorView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              //button for addition
               FloatingActionButton(
                 onPressed: () {
                   setState(() {
@@ -68,6 +73,8 @@ class _CalculatorViewState extends State<CalculatorView> {
                 },
                 child: const Icon(CupertinoIcons.add),
               ),
+
+              //button for subtraction
               FloatingActionButton(
                 onPressed: () {
                   setState(() {
@@ -77,6 +84,8 @@ class _CalculatorViewState extends State<CalculatorView> {
                 },
                 child: const Icon(CupertinoIcons.minus),
               ),
+
+              //button for multiplication
               FloatingActionButton(
                 onPressed: () {
                   setState(() {
@@ -86,6 +95,8 @@ class _CalculatorViewState extends State<CalculatorView> {
                 },
                 child: const Icon(CupertinoIcons.multiply),
               ),
+
+              //button for multiplication
               FloatingActionButton(
                 onPressed: () {
                   setState(() {
@@ -103,6 +114,7 @@ class _CalculatorViewState extends State<CalculatorView> {
             height: 20,
           ),
 
+//clear button for the calculator
           FloatingActionButton.extended(
               onPressed: () {
                 setState(() {
@@ -136,6 +148,7 @@ class Display extends StatelessWidget {
       child: Column(children: [
         //Calculator Display
         TextField(
+          controller: controller,
           keyboardType: TextInputType.number,
           autofocus: true,
           style: const TextStyle(fontSize: 20.0, color: Colors.black),
