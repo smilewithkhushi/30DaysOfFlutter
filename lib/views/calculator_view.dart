@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 //calculator view for the application
 
 class CalculatorView extends StatefulWidget {
-  const CalculatorView({Key? key}) : super(key: key);
+  const CalculatorView({super.key});
 
   @override
   State<CalculatorView> createState() => _CalculatorViewState();
 }
 
 class _CalculatorViewState extends State<CalculatorView> {
-  num x = 0;
-  num y = 0;
+  int x = 0;
+  int y = 0;
   num result = 0;
 
   final displayOneController = TextEditingController();
@@ -28,7 +28,7 @@ class _CalculatorViewState extends State<CalculatorView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(32.0),
+      padding: const EdgeInsets.all(32.0),
       child: Column(
         children: [
           //Calculator Display
@@ -49,7 +49,7 @@ class _CalculatorViewState extends State<CalculatorView> {
 
           Text(
             result.toString(),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 40.0,
                 color: Colors.black,
                 fontWeight: FontWeight.bold),
@@ -66,7 +66,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                         num.tryParse(displayTwoController.text)!;
                   });
                 },
-                child: Icon(CupertinoIcons.add),
+                child: const Icon(CupertinoIcons.add),
               ),
               FloatingActionButton(
                 onPressed: () {
@@ -75,7 +75,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                         num.tryParse(displayTwoController.text)!;
                   });
                 },
-                child: Icon(CupertinoIcons.minus),
+                child: const Icon(CupertinoIcons.minus),
               ),
               FloatingActionButton(
                 onPressed: () {
@@ -84,7 +84,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                         num.tryParse(displayTwoController.text)!;
                   });
                 },
-                child: Icon(CupertinoIcons.multiply),
+                child: const Icon(CupertinoIcons.multiply),
               ),
               FloatingActionButton(
                 onPressed: () {
@@ -93,7 +93,7 @@ class _CalculatorViewState extends State<CalculatorView> {
                         num.tryParse(displayTwoController.text)!;
                   });
                 },
-                child: Icon(CupertinoIcons.divide),
+                child: const Icon(CupertinoIcons.divide),
               ),
             ],
           ),
@@ -105,13 +105,13 @@ class _CalculatorViewState extends State<CalculatorView> {
 
           FloatingActionButton.extended(
               onPressed: () {
-                setState() {
+                setState(() {
                   x = 0;
                   y = 0;
                   result = 0;
                   displayOneController.clear();
                   displayTwoController.clear();
-                }
+                });
               },
               label: const Text("Clear"))
         ],
@@ -132,22 +132,22 @@ class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(32.0),
+      padding: const EdgeInsets.all(32.0),
       child: Column(children: [
         //Calculator Display
         TextField(
           keyboardType: TextInputType.number,
           autofocus: true,
-          style: TextStyle(fontSize: 20.0, color: Colors.black),
+          style: const TextStyle(fontSize: 20.0, color: Colors.black),
           decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black, width: 2.0),
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
             filled: true,
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.black54),
-            enabledBorder: OutlineInputBorder(
+            hintStyle: const TextStyle(color: Colors.black54),
+            enabledBorder: const OutlineInputBorder(
               borderSide:
                   BorderSide(color: Colors.deepOrangeAccent, width: 2.0),
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
